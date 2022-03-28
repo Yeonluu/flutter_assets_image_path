@@ -45,6 +45,8 @@ class AssetsImagePathGenerator extends GeneratorForAnnotation<AssetsImagePath> {
       }
     }
 
+    _codeContent = '';
+
     /// 遍历处理图片资源路径
     handleImages(imagesPath);
 
