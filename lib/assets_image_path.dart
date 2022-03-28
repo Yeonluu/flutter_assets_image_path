@@ -16,10 +16,7 @@ class AssetsImagePathGenerator extends GeneratorForAnnotation<AssetsImagePath> {
       Element element, ConstantReader annotation, BuildStep buildStep) {
     String explanation =
         '// **************************************************************************\n'
-        '// 如果存在新文件需要更新，建议先执行清除命令：\n'
-        '// flutter packages pub run build_runner clean \n'
-        '// \n'
-        '// 然后执行下列命令重新生成相应文件：\n'
+        '// 在终端执行下列命令生成相应文件：\n'
         '// flutter packages pub run build_runner build \n'
         '// **************************************************************************';
 
@@ -71,7 +68,7 @@ class AssetsImagePathGenerator extends GeneratorForAnnotation<AssetsImagePath> {
         handleImages('${file.path}/');
       } else if (type == FileSystemEntityType.file) {
         var ex = extension(file.path).toLowerCase();
-        if (ex == 'png' || ex == 'jpg' || ex == 'jpeg' || ex == 'svg') {
+        if (ex == '.png' || ex == '.jpg' || ex == '.jpeg' || ex == '.svg') {
           fileList.add(file);
         }
       }
