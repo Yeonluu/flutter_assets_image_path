@@ -67,11 +67,13 @@ class AssetsImagePathGenerator extends GeneratorForAnnotation<AssetsImagePath> {
     for (var file in directory.listSync()) {
       var type = file.statSync().type;
       if (type == FileSystemEntityType.directory &&
-          !file.path.contains("3.0x") &&
-          !_codeContent.contains(file.path)) {
+          !file.path.contains("3.0x")) {
         handleImages('${file.path}/');
       } else if (type == FileSystemEntityType.file) {
-        fileList.add(file);
+        var ex = extension(file.path).toLowerCase();
+        if (ex == 'png' || ex == 'jpg' || ex == 'jpeg' || ex == 'svg') {
+          fileList.add(file);
+        }
       }
     }
 
