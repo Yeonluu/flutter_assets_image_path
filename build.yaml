@@ -3,6 +3,6 @@ builders:
   image_builder:
     import: 'package:assets_image_path/builder.dart'
     builder_factories: ['imagePathBuilder']
-    build_extensions: { '.dart': ['.images.dart'] } 
+    build_extensions: { '.dart': ['.g.dart'] } 
     auto_apply: dependents
     build_to: source
