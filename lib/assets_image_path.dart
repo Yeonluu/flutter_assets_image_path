@@ -58,8 +58,12 @@ class AssetsImagePathGenerator extends GeneratorForAnnotation<AssetsImagePath> {
         '}';
   }
 
-  void handleImages(String path) {
+  void handleImages(String path, {bool isSubfolder = false}) {
     var directory = Directory(path);
+    var prefix = '';
+    if (isSubfolder) {
+      prefix = basename(path) + '_';
+    }
 
     List<FileSystemEntity> fileList = [];
 
@@ -67,7 +71,7 @@ class AssetsImagePathGenerator extends GeneratorForAnnotation<AssetsImagePath> {
       var type = file.statSync().type;
       if (type == FileSystemEntityType.directory &&
           !file.path.contains("3.0x")) {
-        handleImages('${file.path}/');
+        handleImages('${file.path}/', isSubfolder: true);
       } else if (type == FileSystemEntityType.file) {
         var ex = extension(file.path).toLowerCase();
         if (ex == '.png' || ex == '.jpg' || ex == '.jpeg' || ex == '.svg') {
@@ -83,7 +87,7 @@ class AssetsImagePathGenerator extends GeneratorForAnnotation<AssetsImagePath> {
       basenameWithoutExtension(file.path);
 
       var name = basenameWithoutExtension(file.path);
-      name = changeToCamelCase(name);
+      name = changeToCamelCase('$prefix$name');
 
       _codeContent =
           '$_codeContent\n\t\t\t\tlate final $name = \'${file.path}\';\n';
